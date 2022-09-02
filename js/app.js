@@ -20,7 +20,7 @@ const setAllCategories = (categories) => {
     const categoryDiv = document.createElement("div");
     categoryDiv.classList.add("text-center");
     categoryDiv.innerHTML = `
-      <button class="hover:bg-sky-300 hover:px-4 rounded " onclick="loadAllNews('${category_id}')">${category_name}</button>
+      <button class="hover:bg-sky-300 px-4 hover:px-4 rounded " onclick="loadAllNews('${category_id}')">${category_name}</button>
       `;
     categoriesContrainer.appendChild(categoryDiv);
   }
@@ -43,8 +43,94 @@ const setAllNews = async (allNews) => {
   
   `;
   console.log(data);
+  const cardContainer = document.getElementById("card-container");
+  cardContainer.innerHTML = "";
   data.forEach((news) => {
+    const totalView = news.total_view;
     console.log(news);
+
+    const cardDiv = document.createElement("div");
+    cardDiv.classList.add("my-8");
+
+    cardDiv.innerHTML = `
+    
+    <div class="card lg:card-side py-8 bg-base-100 shadow-xl">
+            <div>
+              <img src="${news.thumbnail_url}" alt="Album" />
+            </div>
+
+            <div class="card-body">
+              <h2 class="card-title">${news.title}</h2>
+              <p>${news.details.slice(0, 200)}...</p>
+              
+              <div class="card-actions justify-end">
+               
+
+                <label onclick="newsDetails('${
+                  news._id
+                }')" for="my-modal" class="btn btn-primary modal-button"><i class="fa-sharp fa-solid fa-arrow-right-long"></i></label>
+              </div>
+
+
+
+
+            <div>
+                <div class="flex">
+                    <div>
+                        <img class="w-10 mr-4 rounded-full" src="${
+                          news.author.img
+                        }" alt="Album" />
+                    </div>
+                   <div>
+                        <p>${
+                          news.author.name
+                            ? news.author.name
+                            : "No data available"
+                        }       </p>
+                        <p>${
+                          news.author.published_date
+                            ? news.author.published_date
+                            : "No data available"
+                        }   </p>
+                    </div>
+                </div>
+            </div>
+
+              
+            
+          </div>
+    `;
+    cardContainer.appendChild(cardDiv);
   });
+};
+
+const newsDetails = async (newsId) => {
+  //   console.log(newsId);
+  const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  showPlyerModals(data.data);
+};
+
+const showPlyerModals = (data) => {
+  data = data[0];
+  console.log(data);
+  const modalBody = document.getElementById("modal-body");
+  modalBody.innerHTML = `
+  
+<h2 class="text-2xl font-bold">${data.title}</h2>
+<p>${data.details ? data.details : "No data available"}</p>
+<div class="">
+<p class="mt-4 font-semibold">Author:${
+    data.author.name ? data.author.name : "No data available"
+  }</p>
+<p class="mt-4 font-semibold">Published Date:${
+    data.author.published_date
+      ? data.author.published_date
+      : "No data available"
+  }</p>
+</div>
+  
+  `;
 };
 loadAllCategories();
