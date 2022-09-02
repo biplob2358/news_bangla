@@ -54,35 +54,29 @@ const setAllNews = async (allNews) => {
 
     cardDiv.innerHTML = `
     
-    <div class="card lg:card-side py-8 bg-base-100 shadow-xl">
-            <div>
+    <div class="card lg:card-side   bg-base-100 shadow-xl">
+            
               <img src="${news.thumbnail_url}" alt="Album" />
-            </div>
+            
 
             <div class="card-body">
               <h2 class="card-title">${news.title}</h2>
               <p>${news.details.slice(0, 200)}...</p>
               
-              <div class="card-actions justify-end">
-               
-
-                <label onclick="newsDetails('${
-                  news._id
-                }')" for="my-modal" class="btn btn-primary modal-button"><i class="fa-sharp fa-solid fa-arrow-right-long"></i></label>
-              </div>
+             
 
 
 
 
-            <div>
-                <div class="flex">
+            <div class="grid grid-cols-3">
+                <div class="flex  ">
                     <div>
                         <img class="w-10 mr-4 rounded-full" src="${
                           news.author.img
                         }" alt="Album" />
                     </div>
                    <div>
-                        <p>${
+                        <p class="font-bold">${
                           news.author.name
                             ? news.author.name
                             : "No data available"
@@ -94,6 +88,17 @@ const setAllNews = async (allNews) => {
                         }   </p>
                     </div>
                 </div>
+                <div class="flex justify-center gap-4">
+                  <span class="text-2xl"> <i class="fa-solid fa-eye"></i></span>
+                    <p class=" flex-initial text-2xl">${news.total_view}</p>
+                </div>
+                <div class="card-actions justify-end">
+               
+
+                    <label onclick="newsDetails('${
+                      news._id
+                    }')" for="my-modal" class="btn btn-primary modal-button"><i class="fa-sharp fa-solid fa-arrow-right-long"></i></label>
+              </div>
             </div>
 
               
