@@ -54,7 +54,7 @@ const setAllNews = async (allNews) => {
 
     cardDiv.innerHTML = `
     
-    <div class="card lg:card-side   bg-base-100 shadow-xl">
+    <div class="card lg:card-side p-4  bg-base-100 shadow-xl">
             
               <img src="${news.thumbnail_url}" alt="Album" />
             
@@ -68,8 +68,8 @@ const setAllNews = async (allNews) => {
 
 
 
-            <div class="grid grid-cols-3">
-                <div class="flex  ">
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 ">
+                <div class="flex sm:justify-center  items-center  ">
                     <div>
                         <img class="w-10 mr-4 rounded-full" src="${
                           news.author.img
@@ -88,11 +88,22 @@ const setAllNews = async (allNews) => {
                         }   </p>
                     </div>
                 </div>
-                <div class="flex justify-center gap-4">
+                <div class="flex  items-center content-center  gap-4">
                   <span class="text-2xl"> <i class="fa-solid fa-eye"></i></span>
-                    <p class=" flex-initial text-2xl">${news.total_view}</p>
+                    <p class=" flex-initial text-2xl">${
+                      news.total_view ? news.total_view : "No data available"
+                    }</p>
                 </div>
-                <div class="card-actions justify-end">
+                <div class="text-2xl flex items-center text-yellow-600 ">
+                   <span><i class="fa-solid fa-star"></i></span>   
+                   <span><i class="fa-solid fa-star"></i></span>   
+                   <span><i class="fa-solid fa-star"></i></span>   
+                   <span><i class="fa-solid fa-star"></i></span>   
+                   
+                   <span><i class="fa-regular fa-star-half-stroke"></i></span>
+
+                </div>
+                <div class="card-actions justify-center ">
                
 
                     <label onclick="newsDetails('${
