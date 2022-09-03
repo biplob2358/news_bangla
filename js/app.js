@@ -1,10 +1,15 @@
 document.getElementById("item-found").style.display = "none";
+document.getElementById("spinnerView").style.display = "none";
 const loadAllCategories = async () => {
-  const url = `https://openapi.programming-hero.com/api/news/categories`;
+  try {
+    const url = `https://openapi.programming-hero.com/api/news/categories`;
 
-  const res = await fetch(url);
-  const data = await res.json();
-  setAllCategories(data.data.news_category);
+    const res = await fetch(url);
+    const data = await res.json();
+    setAllCategories(data.data.news_category);
+  } catch (error) {
+    alert("Some thing is worng");
+  }
 };
 
 const setAllCategories = (categories) => {
@@ -18,6 +23,7 @@ const setAllCategories = (categories) => {
       "categories-container"
     );
     const categoryDiv = document.createElement("div");
+
     categoryDiv.classList.add("text-center");
     categoryDiv.innerHTML = `
       <button class="hover:bg-sky-300 px-4 hover:px-4 rounded " onclick="loadAllNews('${category_id}')">${category_name}</button>
@@ -27,10 +33,15 @@ const setAllCategories = (categories) => {
 };
 
 const loadAllNews = async (category_id) => {
-  const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  setAllNews(data);
+  document.getElementById("spinnerView").style.display = "block";
+  try {
+    const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    setAllNews(data);
+  } catch (error) {
+    alert("Some thing is worng");
+  }
 };
 
 const setAllNews = async (allNews) => {
@@ -42,12 +53,14 @@ const setAllNews = async (allNews) => {
    <h1>${totalItems} items found </h1>
   
   `;
+  document.getElementById("spinnerView").style.display = "none";
   console.log(data);
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
   data.forEach((news) => {
     const totalView = news.total_view;
-    console.log(news);
+    console.log(totalView);
+    // console.log(news);
 
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("my-8");
@@ -134,9 +147,13 @@ const showPlyerModals = (data) => {
   const modalBody = document.getElementById("modal-body");
   modalBody.innerHTML = `
   
-<h2 class="text-2xl font-bold">${data.title}</h2>
+  
+  <img class="w-full mr-4 " src="${data.image_url}" alt="Album" />
+  <h2 class="text-2xl font-bold">${data.title}</h2>
 <p>${data.details ? data.details : "No data available"}</p>
 <div class="">
+<p><span class="font-semibold">Rating:</span>${data.rating.number}</p>
+<img class="w-10 mr-4 rounded-full" src="${data.author.img}" alt="Album" />
 <p class="mt-4 font-semibold">Author:${
     data.author.name ? data.author.name : "No data available"
   }</p>
@@ -145,8 +162,15 @@ const showPlyerModals = (data) => {
       ? data.author.published_date
       : "No data available"
   }</p>
+  <p><span class="font-semibold">Total View:</span>${
+    data.total_view ? data.total_view : "No data available"
+  }</p>
 </div>
   
   `;
 };
+
+function openBlog() {
+  window.location = "blog.html";
+}
 loadAllCategories();
