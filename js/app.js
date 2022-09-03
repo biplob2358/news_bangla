@@ -13,11 +13,8 @@ const loadAllCategories = async () => {
 };
 
 const setAllCategories = (categories) => {
-  //   console.log(categories);
   for (const category of categories) {
     const { category_name, category_id } = category;
-
-    // console.log(category.category_name);
 
     const categoriesContrainer = document.getElementById(
       "categories-container"
@@ -55,15 +52,12 @@ const setAllNews = async (allNews) => {
   
   `;
   document.getElementById("spinnerView").style.display = "none";
-  // console.log(data);
+
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
 
   data.forEach((news) => {
     const totalView = news.total_view;
-    // console.log(totalView);
-
-    // console.log(news);
 
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("my-8");
@@ -137,7 +131,6 @@ const setAllNews = async (allNews) => {
 };
 
 const newsDetails = async (newsId) => {
-  //   console.log(newsId);
   const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
   const res = await fetch(url);
   const data = await res.json();
