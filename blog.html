@@ -20,7 +20,7 @@
     ></script>
     <title>Blog-News Bangla</title>
   </head>
-  <body class="container mx-auto">
+  <body class="container mx-auto flex flex-col min-h-screen">
     <header>
       <!-- navbar start  -->
       <div class="navbar bg-sky-400 rounded">
@@ -144,4 +144,36 @@
     <!-- javascript  -->
     <script src="js/blog.js"></script>
   </body>
+  <footer
+    class="footer mt-auto rounded bg-sky-400 grid grid-cols-2 p-10 bg-base-200 text-white"
+  >
+    <div>
+      <span class="footer-title">Service</span>
+      <a class="link link-hover">News</a>
+      <a class="link link-hover">Advertisement</a>
+      <a class="link link-hover">Printing Media</a>
+    </div>
+    <div class="self-center">
+      <p>©Copyright || 2020-2022</p>
+      <p>All right deserve by Bangla News</p>
+    </div>
+    <div>
+      <span class="footer-title">Newsletter</span>
+      <div class="form-control w-80">
+        <label class="label">
+          <span class="label-text text-white">Enter your email address</span>
+        </label>
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="username@site.com"
+            class="input input-bordered w-full pr-16"
+          />
+          <button class="btn btn-primary absolute top-0 right-0 rounded-l-none">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>
