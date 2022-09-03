@@ -46,6 +46,7 @@ const loadAllNews = async (category_id) => {
 
 const setAllNews = async (allNews) => {
   const { data } = allNews;
+
   document.getElementById("item-found").style.display = "block";
   const totalItems = data.length;
   const foundItems = document.getElementById("item-found");
@@ -54,12 +55,14 @@ const setAllNews = async (allNews) => {
   
   `;
   document.getElementById("spinnerView").style.display = "none";
-  console.log(data);
+  // console.log(data);
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
+
   data.forEach((news) => {
     const totalView = news.total_view;
-    console.log(totalView);
+    // console.log(totalView);
+
     // console.log(news);
 
     const cardDiv = document.createElement("div");
