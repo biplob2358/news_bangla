@@ -169,4 +169,5 @@ const showPlyerModals = (data) => {
 function openBlog() {
   window.location = "blog.html";
 }
+
 loadAllCategories();
