@@ -139,7 +139,7 @@ const newsDetails = async (newsId) => {
 
 const showPlyerModals = (data) => {
   data = data[0];
-  console.log(data);
+
   const modalBody = document.getElementById("modal-body");
   modalBody.innerHTML = `
   
