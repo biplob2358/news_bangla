@@ -23,7 +23,7 @@ const setAllCategories = (categories) => {
 
     categoryDiv.classList.add("text-center");
     categoryDiv.innerHTML = `
-      <button class="hover:bg-sky-300 px-4 hover:px-4 rounded " onclick="loadAllNews('${category_id}')">${category_name}</button>
+      <button class=" hover:bg-sky-300 px-4 hover:px-4 rounded " onclick="loadAllNews('${category_id}')">${category_name.toUpperCase()}</button>
       `;
     categoriesContrainer.appendChild(categoryDiv);
   }
@@ -55,10 +55,10 @@ const setAllNews = async (allNews) => {
 
   const cardContainer = document.getElementById("card-container");
   cardContainer.innerHTML = "";
-
+  data.sort((a, b) => {
+    return b.total_view - a.total_view;
+  });
   data.forEach((news) => {
-    const totalView = news.total_view;
-
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("my-8");
 
@@ -78,8 +78,8 @@ const setAllNews = async (allNews) => {
 
 
 
-            <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 ">
-                <div class="flex sm:justify-center  items-center  ">
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1  ">
+                <div class="flex sm:mx-auto  items-center  ">
                     <div>
                         <img class="w-10 mr-4 rounded-full" src="${
                           news.author.img
@@ -104,7 +104,7 @@ const setAllNews = async (allNews) => {
                       news.total_view ? news.total_view : "No data available"
                     }</p>
                 </div>
-                <div class="text-2xl flex items-center text-yellow-600 ">
+                <div class="   text-2xl flex items-center text-yellow-600 ">
                    <span><i class="fa-solid fa-star"></i></span>   
                    <span><i class="fa-solid fa-star"></i></span>   
                    <span><i class="fa-solid fa-star"></i></span>   
@@ -113,7 +113,7 @@ const setAllNews = async (allNews) => {
                    <span><i class="fa-regular fa-star-half-stroke"></i></span>
 
                 </div>
-                <div class="card-actions justify-center ">
+                <div class="card-actions justify-end ">
                
 
                     <label onclick="newsDetails('${
